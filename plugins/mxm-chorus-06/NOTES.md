@@ -115,7 +115,7 @@ are a first draft by numbers, for the owner's ear. Until 2026-09-28 the set was 
 positions, `One`, `Two` and `Onetwo`; a project saved with one loaded still names it, because the
 loaded identity carries its own name and baseline. Init has no file. Each carries `Category::Fx`.
 
-**On `crates/mxm-preset` since 2026-09-04**, and its binding since 2026-09-24
+**On `crates/mxm-preset` since 2026-09-04** (mxm-kit's since the split), and its binding since 2026-09-24
 (`editor/binding.rs` re-exports `mxm_preset::binding`). `preset.rs` and `editor/binding.rs` were the
 sixth verbatim copies, made the same day the extraction began landing from another session; this plugin
 moved to the crate as soon as it was committed, which is what the editor's preset row and browser
@@ -144,7 +144,7 @@ Built to the brief, which owns the decisions; what is worth having here is what 
   app bar compacts to that width (design system §3.1);
   the minimum is the card's control/display floor plus the shell gutters (`MINIMUM`, held by
   `the_minimum_window_holds_the_card_at_its_floor`). An indivisible overflow remains scrollable.
-- **The card is a `mxm_ui::tree`** (`crates/ui/AGENTS.md`, *A card body as data*).
+- **The card is a `mxm_ui::tree`** (mxm-kit's [`crates/ui/NOTES.md`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/ui/NOTES.md#a-card-body-as-data--tree), *A card body as data*).
   `sections::card` describes the body once — one row: a column of the knobs (Rate as a knob row, its
   tempo sync's quarter note, the other three as the collection's knob row, `tree::knob_row`) over
   the circuit's buttons, a `Space` making up `SPACE_5` beyond the row's spacing, then the Sweep, as

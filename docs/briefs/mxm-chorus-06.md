@@ -1,6 +1,6 @@
 # mxm-chorus-06 — UI design brief
 
-Required by `MXM_DESIGN_SYSTEM.md` §14, written before implementation. Answers the ten questions in
+Required by mxm-kit's [`MXM_DESIGN_SYSTEM.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/MXM_DESIGN_SYSTEM.md) §14, written before implementation. Answers the ten questions in
 order, then records the deliberate deviations.
 
 **Plugin:** the JUNO-106's bucket-brigade chorus as a standalone effect, with the four quantities
@@ -102,7 +102,8 @@ second scheme — one for instruments, one for effects — with nothing to keep 
 
 The accent is used for the arc, the marker and the selected fill; **no text is drawn in it**, so the
 contrast requirement that applies is the non-text one, which the shipped tokens already meet — they
-are the same tokens every other editor draws its controls with, measured in `crates/ui`.
+are the same tokens every other editor draws its controls with, measured in `crates/ui` (mxm-kit's
+`mxm-ui` since the split, 2026-10-06).
 
 ## 8. Live visualizations
 

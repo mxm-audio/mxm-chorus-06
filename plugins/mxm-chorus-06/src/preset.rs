@@ -2,8 +2,10 @@
 //!
 //! The format, the library on disk, favourites, the loaded identity and the app-bar controls are
 //! `mxm-preset`'s — one crate for every instrument and effect, extracted from the verbatim copies
-//! this file used to be one of (`plugins/AGENTS.md`, *A preset is parameter values*). What is left
-//! here is what only this plugin knows: its id, its parameters, and its ten sounds.
+//! this file used to be one of (`plugins/AGENTS.md`, *A preset is parameter values*; since the
+//! split that section is mxm-kit's `docs/plugin-conventions.md`, and `plugins/AGENTS.md` keeps its
+//! one-line contract). What is left here is what only this plugin knows: its id, its parameters,
+//! and its ten sounds.
 //!
 //! # Ten chorus sounds, and the circuit's positions are not among them
 //!

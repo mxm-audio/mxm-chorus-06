@@ -51,7 +51,8 @@ reports 33 passed and nothing failed. Not yet run in a commercial host.
 
 **Fidelity is UNVERIFIED.** No hardware was measured, here or in the instrument this chorus comes
 from; the delay range, depth, noise level and the I + II rate are chosen, and `crates/mxm-poly-06-dsp`'s
-`AGENTS.md` lists each. What *is* proved is that this plugin at each of the three buttons is that
+`AGENTS.md` lists each (in mxm-poly-06; the table is now its
+[`NOTES.md` § What is chosen, not measured](https://github.com/mxm-audio/mxm-poly-06/blob/main/crates/mxm-poly-06-dsp/NOTES.md#what-is-chosen-not-measured)). What *is* proved is that this plugin at each of the three buttons is that
 instrument's chorus to the bit.
 
 ## Building
@@ -61,4 +62,4 @@ cargo xtask bundle mxm-chorus-06 --release
 clap-validator validate "target/bundled/mxm-chorus-06.clap"
 ```
 
-MIT licensed — see [LICENSE](LICENSE). All code is original.
+GPL-3.0-or-later — see the repository's [`LICENSE`](../../LICENSE) at its root. All code is original.

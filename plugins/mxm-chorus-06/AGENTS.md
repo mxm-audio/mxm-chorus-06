@@ -17,8 +17,9 @@ plugin**. The history, measurements and reasoning behind each contract are in [N
 
 # Ownership
 
-`Cargo.toml`, `LICENSE`, `README.md`, `control-map.json`, `presets/`, and `src/` — `lib.rs`,
-`params.rs`, `preset.rs`, `telemetry.rs`, and `editor.rs` with `editor/{binding, sections}.rs`.
+`Cargo.toml`, `README.md`, `control-map.json`, `presets/`, and `src/` — `lib.rs`, `params.rs`,
+`preset.rs`, `telemetry.rs`, and `editor.rs` with `editor/{binding, sections}.rs`. Its licence is the
+repository's root `LICENSE`; there is no per-plugin `LICENSE` since the split (2026-10-06).
 The brief it is built to is [`docs/briefs/mxm-chorus-06.md`](../../docs/briefs/mxm-chorus-06.md),
 which is root-owned and gates the editor.
 
@@ -116,7 +117,7 @@ before it touches anything. The floor is derived, not musical, and no ceiling is
   `the_factory_files_match_the_design_they_were_generated_from`,
   `no_factory_preset_is_init_or_a_button` and `a_synced_preset_picks_its_division` hold them. Each
   carries `Category::Fx`.
-- **Presets are `crates/mxm-preset`'s**, and `editor/binding.rs` re-exports `mxm_preset::binding`.
+- **Presets are `crates/mxm-preset`'s** (mxm-kit's), and `editor/binding.rs` re-exports `mxm_preset::binding`.
   What is left here is the `Instrument` impl, `FACTORY_FILES`, and the ten sounds.
 
 ## No note port, so no developer channel
@@ -166,13 +167,15 @@ cargo xtask bundle mxm-chorus-06                  # debug: assert_process_allocs
 clap-validator validate "target/bundled/mxm-chorus-06.clap"
 cargo xtask bundle mxm-chorus-06 --release
 clap-validator validate "target/bundled/mxm-chorus-06.clap"
+# in mxm-poly-06, whose tag this repository pins:
 cargo test -p mxm-poly-06-dsp                     # the module both products share
 cargo test -p mxm-poly-06-host-tests --test golden_audio   # the synth unchanged, chorus on and off
 ```
 
-`mxm-poly-06`’s four golden scores — dry, I, II and Both — protect the shared module. Bitwig mono
-and stereo operation and listening fidelity remain manual gates; automated proof establishes
-circuit equality with the instrument, not hardware fidelity.
+`mxm-poly-06`’s four golden scores — dry, I, II and Both — protect the shared module; they are
+pinned on Windows only, and compared within rounding or skipped elsewhere (the owner,
+2026-10-06). Bitwig mono and stereo operation and listening fidelity remain manual gates;
+automated proof establishes circuit equality with the instrument, not hardware fidelity.
 
 # Child DOX Index
 

@@ -92,8 +92,8 @@ pub type MxmChorus06Editor = nice_plug_egui::EguiEditor<MxmChorus06App>;
 ///
 /// **Not `globally_used_rect`**: the central panel fills the window whatever is in it, so that
 /// measure only exceeds the window once something is already cut off, and reads as exactly full
-/// for any window taller than its content. `apps/mxm-player`'s and poly-06's scar, avoided here by
-/// measuring the card itself.
+/// for any window taller than its content. `apps/mxm-player`'s and poly-06's scar (in mxm-player
+/// and mxm-poly-06), avoided here by measuring the card itself.
 pub(crate) fn content_bottom_id() -> egui::Id {
     egui::Id::new("mxm-chorus-06-content-bottom")
 }
