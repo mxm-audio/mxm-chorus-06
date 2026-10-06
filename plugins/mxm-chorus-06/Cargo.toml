@@ -1,0 +1,43 @@
+[package]
+name = "mxm-chorus-06"
+description = "The JUNO-106's bucket-brigade chorus as a standalone effect, unlocked: rate, depth, mix and noise, with the circuit's three positions as presets"
+version.workspace = true
+edition.workspace = true
+# The editor pulls in egui, which declares 1.95. `mxm-poly-06-dsp`, which this plugin depends on in
+# place rather than copying, stays at 1.87 and must not be dragged up with it - the effect depends
+# on the DSP, never the reverse.
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[lib]
+# `lib` as well as `cdylib`: the shipped artifact is the `cdylib`. The `lib` is what lets a test or
+# a standalone harness link the plugin; it adds no dependencies and changes nothing about the
+# bundle. **Do not enable nice-plug's `standalone` feature here** - it pulls in cpal and JACK, and
+# Cargo's feature unification would put them in the shipped `.clap`.
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+nice-plug.workspace = true
+nice-plug-egui.workspace = true
+mxm-ui.workspace = true
+# Presets: the format, the library on disk, favourites, the loaded identity and the app-bar
+# controls, one crate for every instrument and effect. This plugin carried a verbatim copy of all
+# of it until the crate was extracted; `serde`, `serde_json` and `dirs` left with that copy.
+mxm-preset.workspace = true
+mxm-tempo.workspace = true
+egui.workspace = true
+# The chorus itself. A compile-time dependency on the instrument's DSP crate, not a copy of it: one
+# implementation, and the synth's render provably unchanged (see the crate's chorus-on golden
+# scores). Linking discards the voices this plugin never calls.
+mxm-poly-06-dsp.workspace = true
+
+[dev-dependencies]
+# The collection's shared headless checks (`crates/mxm-plugin-test`).
+mxm-plugin-test.workspace = true
+# `wgpu` renders a frame to pixels for the layout-tree review pictures
+# (`mxm_plugin_test::tree_checks`, `editor::tests::tree_pictures`). Test-only: nothing here reaches
+# the bundle.
+egui_kittest = { version = "=0.36.1", features = ["wgpu"] }
+image = { version = "=0.25.9", default-features = false, features = ["png"] }

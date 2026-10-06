@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-chorus-06",
+  "name": "Deep ensemble",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "depth": {
+      "v": 1.0,
+      "text": "2.40 ms"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    },
+    "noise": {
+      "v": 1.0,
+      "text": "100 %"
+    },
+    "rate": {
+      "v": 0.33466354,
+      "text": "0.50 Hz"
+    },
+    "ratesync": {
+      "v": 0.0,
+      "text": "Off"
+    }
+  },
+  "state": null
+}

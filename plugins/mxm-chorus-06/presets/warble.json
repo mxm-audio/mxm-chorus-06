@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-chorus-06",
+  "name": "Warble",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "depth": {
+      "v": 0.74999994,
+      "text": "1.80 ms"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    },
+    "noise": {
+      "v": 0.7,
+      "text": "70 %"
+    },
+    "rate": {
+      "v": 0.78126127,
+      "text": "5.00 Hz"
+    },
+    "ratesync": {
+      "v": 0.0,
+      "text": "Off"
+    }
+  },
+  "state": null
+}

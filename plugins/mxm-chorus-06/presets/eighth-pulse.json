@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-chorus-06",
+  "name": "Eighth pulse",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "depth": {
+      "v": 0.25,
+      "text": "0.60 ms"
+    },
+    "mix": {
+      "v": 0.9,
+      "text": "90 %"
+    },
+    "noise": {
+      "v": 0.4,
+      "text": "40 %"
+    },
+    "rate": {
+      "v": 0.61538464,
+      "text": "2.57 Hz"
+    },
+    "ratesync": {
+      "v": 1.0,
+      "text": "On"
+    }
+  },
+  "state": null
+}

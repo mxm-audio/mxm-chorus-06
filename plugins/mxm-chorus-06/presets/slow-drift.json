@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-chorus-06",
+  "name": "Slow drift",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "depth": {
+      "v": 0.8333333,
+      "text": "2.00 ms"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    },
+    "noise": {
+      "v": 0.6,
+      "text": "60 %"
+    },
+    "rate": {
+      "v": 0.15389791,
+      "text": "0.10 Hz"
+    },
+    "ratesync": {
+      "v": 0.0,
+      "text": "Off"
+    }
+  },
+  "state": null
+}

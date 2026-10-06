@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-chorus-06",
+  "name": "Fast shimmer",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "depth": {
+      "v": 0.16666666,
+      "text": "0.40 ms"
+    },
+    "mix": {
+      "v": 0.8,
+      "text": "80 %"
+    },
+    "noise": {
+      "v": 0.5,
+      "text": "50 %"
+    },
+    "rate": {
+      "v": 0.650614,
+      "text": "3.00 Hz"
+    },
+    "ratesync": {
+      "v": 0.0,
+      "text": "Off"
+    }
+  },
+  "state": null
+}

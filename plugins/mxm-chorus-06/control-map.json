@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Which of mxm-chorus-06's parameters fill the collection's control roles.",
+    "Roles come from docs/MXM_CONTROL_MAP.md, which is normative; parameters are named by",
+    "their permanent string id, never by display name.",
+    "",
+    "`fx.chorus` IS DELIBERATELY UNFILLED. It is a stepped role - the built-in chorus's Off / I /",
+    "II / Both switch - and this plugin has no switch: Mix at zero is Off, and an existing role's",
+    "curve is never changed (docs/MXM_CONTROL_MAP.md section 5). The three roles below were",
+    "appended to the Effects page in the same change as this plugin, which is the rule under",
+    "which a plugin may claim a role (section 9's mxm-mono-02 case).",
+    "",
+    "Noise is off the controller: a setup control, not a performance one."
+  ],
+  "instruments": [
+    {
+      "clap_id": "dk.mxm.mxm-chorus-06",
+      "name": "mxm-chorus-06",
+      "params": {
+        "fx.chorus_rate": "rate",
+        "fx.chorus_depth": "depth",
+        "fx.chorus_mix": "mix"
+      }
+    }
+  ]
+}
