@@ -274,7 +274,7 @@ impl MxmChorus06 {
         // Once per block, and only on the path that ran the modulator. **Nothing is published
         // while parked**: the editor draws Off from the parameter, so the audio thread never has
         // to keep a display alive for a plugin that is doing nothing.
-        self.telemetry.publish_peak(peak);
+        self.telemetry.meter.publish(peak);
         self.telemetry.publish_lfo(self.chorus.lfo());
 
         // Off has fully taken: the mute is closed and, on a stereo track, the dry leg is back to
