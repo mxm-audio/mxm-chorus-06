@@ -116,7 +116,7 @@ positions, `One`, `Two` and `Onetwo`; a project saved with one loaded still name
 loaded identity carries its own name and baseline. Init has no file. Each carries `Category::Fx`.
 
 **On `crates/mxm-preset` since 2026-09-04** (mxm-kit's since the split), and its binding since 2026-09-24
-(`editor/binding.rs` re-exports `mxm_preset::binding`). `preset.rs` and `editor/binding.rs` were the
+(`editor/binding.rs` re-exports `mxm_params::binding`). `preset.rs` and `editor/binding.rs` were the
 sixth verbatim copies, made the same day the extraction began landing from another session; this plugin
 moved to the crate as soon as it was committed, which is what the editor's preset row and browser
 are. What is left here is the `Instrument` impl, `FACTORY_FILES`, and the ten sounds — the

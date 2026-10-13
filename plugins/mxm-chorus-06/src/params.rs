@@ -28,10 +28,11 @@
 //!
 //! [`CONTROL_SLEW_S`]: mxm_poly_06_dsp::chorus::CONTROL_SLEW_S
 
+use mxm_params::text;
 use mxm_poly_06_dsp::chorus::{DELAY_DEPTH_MS, DEPTH_MAX_MS, RATE_BOTH_HZ, RATE_I_HZ, RATE_II_HZ};
 use mxm_preset::PresetIdentity;
 use nice_plug::prelude::*;
-use std::sync::{Arc, RwLock};
+use std::sync::RwLock;
 
 /// The rate control's ends. **Chosen**: below the circuit's slowest by a decade, and up to where a
 /// chorus becomes a vibrato, with the circuit's three positions in the middle of the travel.
@@ -70,27 +71,6 @@ pub fn position(rate_hz: f32, synced: bool) -> Option<usize> {
     }
     let rate = circuit_rate(rate_hz);
     POSITIONS.iter().position(|(_, hz)| *hz == rate)
-}
-
-/// Formats a parameter value for display.
-type ValueToString = Arc<dyn Fn(f32) -> String + Send + Sync>;
-/// Parses a typed-in value, returning `None` if it cannot be understood.
-type StringToValue = Arc<dyn Fn(&str) -> Option<f32> + Send + Sync>;
-
-/// Show a `0..=1` control as a percentage.
-fn v2s_percent() -> ValueToString {
-    Arc::new(|v| format!("{:.0} %", v * 100.0))
-}
-
-fn s2v_percent() -> StringToValue {
-    Arc::new(|text| {
-        text.trim()
-            .trim_end_matches('%')
-            .trim()
-            .parse::<f32>()
-            .ok()
-            .map(|v| v / 100.0)
-    })
 }
 
 /// **The LFO rate's tempo sync** (`plans/plan-tempo-sync-controls.md`): every LFO's ladder, 1/32 to
@@ -161,12 +141,12 @@ impl Default for MxmChorus06Params {
             .with_value_to_string(formatters::v2s_f32_rounded(2)),
             mix: FloatParam::new("Mix", 1.0, FloatRange::Linear { min: 0.0, max: 1.0 })
                 .with_smoother(SmoothingStyle::Linear(10.0))
-                .with_value_to_string(v2s_percent())
-                .with_string_to_value(s2v_percent()),
+                .with_value_to_string(text::percent())
+                .with_string_to_value(text::parse_percent()),
             noise: FloatParam::new("Noise", 1.0, FloatRange::Linear { min: 0.0, max: 1.0 })
                 .with_smoother(SmoothingStyle::Linear(10.0))
-                .with_value_to_string(v2s_percent())
-                .with_string_to_value(s2v_percent()),
+                .with_value_to_string(text::percent())
+                .with_string_to_value(text::parse_percent()),
 
             preset: RwLock::new(PresetIdentity::none()),
         }
@@ -249,5 +229,17 @@ mod sync_tests {
             (bottom - slowest).abs() < 1e-4,
             "{bottom} against {slowest}"
         );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// **Every parameter's text survives the host's round trip**, with the unit on, across the
+    /// collection's grids and switch points (`mxm_plugin_test::text_checks`).
+    #[test]
+    fn every_parameter_text_survives_the_hosts_round_trip() {
+        mxm_plugin_test::text_checks::every_text_round_trips(&MxmChorus06Params::default(), &[]);
     }
 }
