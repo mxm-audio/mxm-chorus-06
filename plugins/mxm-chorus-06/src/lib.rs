@@ -62,8 +62,8 @@ mod params;
 pub mod preset;
 mod telemetry;
 
+use mxm_dsp::guard::flush;
 use mxm_poly_06_dsp::chorus::{Chorus, Mode, NOISE_LEVEL, WET_SWITCH_S};
-use mxm_poly_06_dsp::flush;
 use nice_plug::prelude::*;
 use params::MxmChorus06Params;
 use std::sync::Arc;
