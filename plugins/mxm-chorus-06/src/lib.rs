@@ -403,12 +403,35 @@ impl ClapPlugin for MxmChorus06 {
     ];
 }
 
+impl Vst3Plugin for MxmChorus06 {
+    /// Permanent, as `CLAP_ID` is: the CLAP id's hash written out, held to it by
+    /// `identity::the_vst3_class_id_is_the_clap_ids_hash`.
+    const VST3_CLASS_ID: [u8; 16] = [
+        0xc0, 0xb0, 0xa4, 0xf0, 0x33, 0x52, 0x8f, 0x8a, 0xa3, 0x1c, 0xe8, 0xee, 0x28, 0x79, 0xdf,
+        0xfa,
+    ];
+    const VST3_SUBCATEGORIES: &'static [Vst3SubCategory] =
+        &[Vst3SubCategory::Fx, Vst3SubCategory::Modulation];
+}
+
 nice_export_clap!(MxmChorus06);
+nice_export_vst3!(MxmChorus06);
 
 /// The plugin's name, checked where it escapes this crate.
 #[cfg(test)]
 mod identity {
     use super::{CLAP_ID, NAME};
+    use mxm_plugin_test::formats;
+
+    #[test]
+    fn the_vst3_class_id_is_the_clap_ids_hash() {
+        formats::the_vst3_class_id_is_the_clap_ids_hash::<super::MxmChorus06>();
+    }
+
+    #[test]
+    fn the_vst3_categories_follow_the_clap_features() {
+        formats::the_vst3_categories_follow_the_clap_features::<super::MxmChorus06>();
+    }
 
     /// The id is built from the name, so it cannot drift from it.
     #[test]

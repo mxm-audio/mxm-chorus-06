@@ -30,6 +30,7 @@ which is root-owned and gates the editor.
 | What | Value |
 |---|---|
 | `CLAP_ID` | `dk.mxm.mxm-chorus-06` — assembled from `plugin_name!` in `src/lib.rs`, **not** from `CARGO_PKG_NAME` |
+| `VST3_CLASS_ID` | `VST3_CLASS_ID` in `src/lib.rs`, the CLAP id's hash written out |
 | Parameter `#[id]`s | `rate` `ratesync` `depth` `mix` `noise` |
 | Control-map roles | `fx.chorus_rate` `fx.chorus_depth` `fx.chorus_mix` — appended to the standard's page 9 with this plugin; `fx.chorus` deliberately unfilled (stepped, and the circuit's buttons set Rate rather than being a parameter) |
 
