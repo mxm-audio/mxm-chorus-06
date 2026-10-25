@@ -18,8 +18,11 @@ plugin**. The history, measurements and reasoning behind each contract are in [N
 # Ownership
 
 `Cargo.toml`, `README.md`, `control-map.json`, `presets/`, and `src/` — `lib.rs`, `params.rs`,
-`preset.rs`, `telemetry.rs`, and `editor.rs` with `editor/{binding, sections}.rs`. Its licence is the
-repository's root `LICENSE`; there is no per-plugin `LICENSE` since the split (2026-10-06).
+`preset.rs`, `telemetry.rs`, and `editor.rs` with `editor/{binding, sections}.rs` — and
+`host-tests/`, the release bundle through MXM Player: discovery and the map's roles, every
+parameter read, a changed parameter saved and reopened, the default chorus to exact silence, and
+bypass. Its licence is the repository's root `LICENSE`; there is no per-plugin `LICENSE` since the
+split (2026-10-06).
 The brief it is built to is [`docs/briefs/mxm-chorus-06.md`](../../docs/briefs/mxm-chorus-06.md),
 which is root-owned and gates the editor.
 
@@ -168,7 +171,9 @@ cargo xtask bundle mxm-chorus-06                  # debug: assert_process_allocs
 clap-validator validate "target/bundled/mxm-chorus-06.clap"
 cargo xtask bundle mxm-chorus-06 --release
 clap-validator validate "target/bundled/mxm-chorus-06.clap"
-# in mxm-poly-06, whose tag this repository pins:
+cargo xtask fetch                                 # mxm-mono-01, the source the chain plays
+cargo test -p mxm-chorus-06-host-tests --test effect_chain
+# in mxm-poly-06, whose main this repository locks to a commit:
 cargo test -p mxm-poly-06-dsp                     # the module both products share
 cargo test -p mxm-poly-06-host-tests --test golden_audio   # the synth unchanged, chorus on and off
 ```
