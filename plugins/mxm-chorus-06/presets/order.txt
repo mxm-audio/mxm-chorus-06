@@ -1,0 +1,10 @@
+clean-doubler.json
+gentle-width.json
+slow-drift.json
+deep-ensemble.json
+wide-pad.json
+fast-shimmer.json
+warble.json
+rotary-swirl.json
+bar-sweep.json
+eighth-pulse.json

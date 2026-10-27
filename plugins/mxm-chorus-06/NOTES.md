@@ -119,7 +119,7 @@ loaded identity carries its own name and baseline. Init has no file. Each carrie
 (`editor/binding.rs` re-exports `mxm_params::binding`). `preset.rs` and `editor/binding.rs` were the
 sixth verbatim copies, made the same day the extraction began landing from another session; this plugin
 moved to the crate as soon as it was committed, which is what the editor's preset row and browser
-are. What is left here is the `Instrument` impl, `FACTORY_FILES`, and the ten sounds — the
+are. What is left here is the `Instrument` impl and the ten sounds, files in `presets/` — the
 identity type, the format, the library and the favourites are the crate's.
 
 ## No note port, so no developer channel

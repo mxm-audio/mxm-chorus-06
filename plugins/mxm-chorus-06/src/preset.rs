@@ -46,8 +46,13 @@ impl mxm_preset::Instrument for MxmChorus06Params {
         &self.preset
     }
 
-    fn factory_files(&self) -> &'static [(&'static str, &'static str)] {
+    /// The installed set, but in a unit test, which is loaded from no bundle: the repository's.
+    #[cfg(test)]
+    fn factory_files(&self) -> Vec<(String, String)> {
         FACTORY_FILES
+            .iter()
+            .map(|(name, json)| ((*name).to_owned(), (*json).to_owned()))
+            .collect()
     }
 
     fn default_missing_legacy_parameter(&self, id: &str) -> bool {
@@ -55,29 +60,22 @@ impl mxm_preset::Instrument for MxmChorus06Params {
     }
 }
 
-/// The factory set, compiled in.
-///
-/// **Ten files, from the subtlest to the strongest, and Init is not one of them** — see
-/// [`Preset::init`], which is the circuit at I. Files rather than code, like every factory set: a
-/// sound nobody can read is a sound nobody can learn from.
-pub const FACTORY_FILES: &[(&str, &str)] = &[
-    (
-        "Clean doubler",
-        include_str!("../presets/clean-doubler.json"),
-    ),
-    ("Gentle width", include_str!("../presets/gentle-width.json")),
-    ("Slow drift", include_str!("../presets/slow-drift.json")),
-    (
-        "Deep ensemble",
-        include_str!("../presets/deep-ensemble.json"),
-    ),
-    ("Wide pad", include_str!("../presets/wide-pad.json")),
-    ("Fast shimmer", include_str!("../presets/fast-shimmer.json")),
-    ("Warble", include_str!("../presets/warble.json")),
-    ("Rotary swirl", include_str!("../presets/rotary-swirl.json")),
-    ("Bar sweep", include_str!("../presets/bar-sweep.json")),
-    ("Eighth pulse", include_str!("../presets/eighth-pulse.json")),
-];
+/// The factory set as it ships, `(name, json)` in its order: the repository's `presets/`, which
+/// is installed beside the plugin and read there (`mxm_preset::installed_factory_dir`). For the
+/// tests, the integration tests and the audits, which are loaded from no bundle; the plugin itself
+/// never reads it.
+pub static FACTORY_FILES: std::sync::LazyLock<Vec<(&'static str, &'static str)>> =
+    std::sync::LazyLock::new(|| {
+        let folder = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("presets");
+        mxm_preset::read_factory_dir(&folder)
+            .into_iter()
+            .map(|(file, json)| {
+                let name = mxm_preset::Preset::parse(&json, crate::CLAP_ID)
+                    .map_or(file, |preset| preset.name);
+                (&*String::leak(name), &*String::leak(json))
+            })
+            .collect()
+    });
 
 #[cfg(test)]
 mod tests {
@@ -426,7 +424,7 @@ mod tests {
         };
         let params = params();
         let init = Preset::init(&params);
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let sound = values(&Preset::parse(text, crate::CLAP_ID).expect("parses"));
             assert_ne!(sound, values(&init), "{name:?} is Init");
             for (button, hz) in crate::params::POSITIONS {
@@ -477,7 +475,7 @@ mod tests {
         // A sound is saved with its category (the owner's rule, 2026-09-04), and the factory set
         // is where a person first sees what the categories mean. *Uncategorised* is for files
         // written before the field existed, not for sounds this plugin ships.
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let preset = Preset::parse(text, crate::CLAP_ID).expect("parses");
             assert_ne!(
                 preset.category,
@@ -491,7 +489,7 @@ mod tests {
     fn every_factory_preset_parses_and_is_for_this_instrument() {
         // A malformed factory preset is a build mistake, not a user's, so it is caught here rather
         // than skipped quietly in the browser.
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let preset = Preset::parse(text, crate::CLAP_ID)
                 .unwrap_or_else(|e| panic!("factory preset {name:?} does not parse: {e}"));
             assert_eq!(preset.name, *name, "the file's name must match its listing");
@@ -503,7 +501,7 @@ mod tests {
         // The one that catches a factory preset written before a parameter existed: it would load
         // and quietly leave that parameter wherever the last patch left it.
         let params = params();
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let preset = Preset::parse(text, crate::CLAP_ID).expect("parses");
             let (_, problems) = preset.resolve(&params);
             assert!(

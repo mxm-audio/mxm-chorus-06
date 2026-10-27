@@ -122,7 +122,7 @@ before it touches anything. The floor is derived, not musical, and no ceiling is
   `no_factory_preset_is_init_or_a_button` and `a_synced_preset_picks_its_division` hold them. Each
   carries `Category::Fx`.
 - **Presets are `crates/mxm-preset`'s** (mxm-kit's), and `editor/binding.rs` re-exports `mxm_params::binding`.
-  What is left here is the `Instrument` impl, `FACTORY_FILES`, and the ten sounds.
+  What is left here is the `Instrument` impl and the ten sounds, files in `presets/`.
 
 ## No note port, so no developer channel
 
